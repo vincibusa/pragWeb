@@ -18,8 +18,7 @@ export default function Home() {
       style={{ height: '500px', objectFit: 'cover' }} 
     />
           <Carousel.Caption >
-            <h1>Example headline.</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
+  
             <Button variant="outline-light" href="#">Prenota un tavolo</Button>
           </Carousel.Caption>
         </Carousel.Item>
@@ -31,9 +30,8 @@ export default function Home() {
       style={{ height: '500px', objectFit: 'cover' }} 
     />
           <Carousel.Caption>
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
-            <Button variant="outline-light" href="#">Menù</Button>
+ 
+            <Button variant="outline-light" href="#menu">Menù</Button>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -44,8 +42,7 @@ export default function Home() {
       style={{ height: '500px', objectFit: 'cover' }} 
     />
           <Carousel.Caption >
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
+  
             <Button variant="outline-light" href="#">Chi siamo</Button>
           </Carousel.Caption>
         </Carousel.Item>
