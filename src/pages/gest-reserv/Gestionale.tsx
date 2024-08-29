@@ -17,15 +17,23 @@ export default function Gestionale() {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await getReservations();
-      setReservations(result.reservations);
+      try {
+        const result = await getReservations();
+        setReservations(result.reservations);
+      } catch {
+        setErrorMessage('Failed to fetch reservations.');
+      }
     }
     fetchData();
   }, []);
 
   const handleDeleteReservation = async (id: number) => {
-    await deleteReservation(id);
-    setReservations(reservations.filter((r) => r.id !== id));
+    try {
+      await deleteReservation(id);
+      setReservations(reservations.filter((r) => r.id !== id));
+    } catch {
+      setErrorMessage('Failed to delete reservation.');
+    }
   };
 
   const handleEditReservation = (reservation: Reservation) => {
@@ -34,10 +42,14 @@ export default function Gestionale() {
 
   const handleUpdateReservation = async () => {
     if (editingReservation) {
-      const { id, ...updatedReservation } = editingReservation;
-      await updateReservation(id, updatedReservation);
-      setReservations(reservations.map((r) => (r.id === id ? editingReservation : r)));
-      setEditingReservation(null);
+      try {
+        const { id, ...updatedReservation } = editingReservation;
+        await updateReservation(id, updatedReservation);
+        setReservations(reservations.map((r) => (r.id === id ? editingReservation : r)));
+        setEditingReservation(null);
+      } catch {
+        setErrorMessage('Failed to update reservation.');
+      }
     }
   };
 
@@ -71,6 +83,7 @@ export default function Gestionale() {
   return (
     <div className="container mt-5">
       <h1 className="mb-4">Gestione Prenotazioni</h1>
+      {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
       <ul className="list-group mb-4">
         {reservations.map((reservation) => (
           <li key={reservation.id} className="list-group-item d-flex justify-content-between align-items-center">
@@ -91,7 +104,6 @@ export default function Gestionale() {
 
       {editingReservation && (
         <form className="mb-4 d-flex flex-column gap-3">
-          {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
           <div className="form-group">
             <label>Nome e cognome</label>
             <input
@@ -141,5 +153,5 @@ export default function Gestionale() {
         </form>
       )}
     </div>
-  );
+  ); 
 }
