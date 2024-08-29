@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { addReservation } from '../../../api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
