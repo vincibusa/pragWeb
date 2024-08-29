@@ -19,7 +19,7 @@ export default function Home() {
     />
           <Carousel.Caption >
   
-            <Button variant="outline-light" href="#">Prenota un tavolo</Button>
+            <Button variant="outline-light" href="#prenotazioni">Prenota un tavolo</Button>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
