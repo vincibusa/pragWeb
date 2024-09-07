@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://prag-backend-f260aea8cfa5.herokuapp.com';
 
 interface Reservation {
     id?: number; // Optional because it might not be present when adding a new reservation

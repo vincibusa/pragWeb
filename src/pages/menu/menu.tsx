@@ -28,7 +28,7 @@ const navigateToMenuPizzeria = () => {
     <h1>Menu</h1>
     </div>
     <Card className='mt-5' style={{ width: '100%' , border:'none', borderRadius:0}}>
-      <Card.Img style={{borderRadius:0}} variant="top" src={antipasti} />
+      <Card.Img style={{borderRadius:15}} variant="top" src={antipasti} />
       <Card.Body>
         <Card.Title >Antipasti</Card.Title>
     
@@ -36,7 +36,7 @@ const navigateToMenuPizzeria = () => {
       </Card.Body>
     </Card>
 <Card className='mt-5' style={{ width: '100%' , border:'none', borderRadius:0}}>
-      <Card.Img style={{borderRadius:0}} variant="top" src={image3} />
+      <Card.Img style={{borderRadius:15}} variant="top" src={image3} />
       <Card.Body>
         <Card.Title >Menu Pizzeria</Card.Title>
     
@@ -44,7 +44,11 @@ const navigateToMenuPizzeria = () => {
       </Card.Body>
     </Card>
     <Card className='mt-5' style={{ width: '100%' , border:'none', borderRadius:0}}>
-      <Card.Img style={{borderRadius:0}} variant="top" src={ristorante} />
+        <Card.Img
+        style={{ borderRadius: 15, }} 
+        variant="top"
+        src={ristorante}
+      />
       <Card.Body>
         <Card.Title >Menu Ristorante</Card.Title>
     

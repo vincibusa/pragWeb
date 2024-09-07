@@ -1,5 +1,6 @@
 
 import Barra from './components/Barra';
+import Gallery from './pages/galleria/Gallery';
 import Home from './pages/home/home';
 import Menu from './pages/menu/menu';
 import Reservations from './pages/prenotazioni/Prenotazioni';
@@ -18,6 +19,9 @@ export default function App() {
       </div>
       <div id="prenotazioni">
       <Reservations />
+      </div>
+      <div id="Galleria">
+      <Gallery />
       </div>
       {/* <div id="about">
         <About />

@@ -1,8 +1,8 @@
 import './home.css';
 import {  Button, Carousel } from 'react-bootstrap';
 import image1 from '../../assets/image1.jpeg';
-import image2 from '../../assets/image2.jpeg';
 import about from '../../assets/about.jpg';
+import ImgRest from '../../assets/imgRest.jpeg';
 export default function Home() {
   return (
     <div>
@@ -25,7 +25,7 @@ export default function Home() {
         <Carousel.Item>
         <img
       className="d-block w-100"
-      src={image2}
+      src={ImgRest}
       alt="First slide"
       style={{ height: '500px', objectFit: 'cover' }} 
     />
