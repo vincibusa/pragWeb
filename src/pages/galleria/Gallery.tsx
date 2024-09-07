@@ -16,7 +16,7 @@ export default function Gallery() {
       <div className="row">
         {images.map((image, index) => (
           <div key={index} className="col-6 col-md-6 mb-4">
-            <Card>
+         <Card className="border-0">
               <Card.Img style={{ borderRadius: 15, objectFit: 'cover' }} variant="top" src={image} />
             </Card>
           </div>
