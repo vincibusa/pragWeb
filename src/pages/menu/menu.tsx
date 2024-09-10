@@ -15,16 +15,20 @@ export default function Menu() {
     }, []);
 
     const navigateToMenuAntipasti = () => {
-        navigate('/menu-antipasti');
-    };
-
-    const navigateToMenuPizzeria = () => {
-        navigate('/menu-pizzeria');
-    };
-
-    const navigateToMenuRistorante = () => {
-        navigate('/menu-ristorante');
-    };
+      navigate('/menu-antipasti');
+      window.scrollTo(0, 0); // Scrolla in alto
+  };
+  
+  const navigateToMenuPizzeria = () => {
+      navigate('/menu-pizzeria');
+      window.scrollTo(0, 0); // Scrolla in alto
+  };
+  
+  const navigateToMenuRistorante = () => {
+      navigate('/menu-ristorante');
+      window.scrollTo(0, 0); // Scrolla in alto
+  };
+  
 
     return (
         <Container className="marketing mt-5 text-center">
