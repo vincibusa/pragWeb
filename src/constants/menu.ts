@@ -203,5 +203,31 @@ export interface MenuItem {
   ];
   
 
-  export const Pizzeria: MenuItem[] = [
-  ]
+  export const LePizze: MenuItem[] = [
+    { name: "Margherita", description: "Fior di latte, Pomodoro pelato, Basilico, Olio evo", price: '7.50' },
+    { name: "Romana", description: "Fior di latte, Pomodoro pelato, Prosciutto Cotto (a crudo), Olio evo", price: '8.50 '},
+    { name: "Quattro gusti", description: "Fior di latte, Pomodoro pelato, Prosciutto Cotto, Funghi, Olive nere", price: '9.00' },
+    { name: "Napoli", description: "Fior di latte, Pomodoro pelato, Filetti di acciughe", price: '8.50' },
+    { name: "Parmigiana", description: "Fior di latte, Pomodoro pelato, Chips di Melanzane, Scaglie di grana", price: '9.00' },
+    { name: "Piccante", description: "Fior di latte, Pomodoro pelato, Cipolla rossa, Salame piccante, Olive nere", price: '8.50' },
+    { name: "Vegetariana", description: "Pomodoro pelato, Zucchine grigliate, Melanzane grigliate, Funghi, Radicchio", price: '8.00' },
+    { name: "Marinara", description: "Pomodoro pelato, Filetti di acciughe, Olio evo, Aglio", price: '8.50' },
+    { name: "4 Formaggi", description: "Fior di latte, Gorgonzola, Scamorza, Grana", price: '8.00' },
+    { name: "Margherita sbagliata", description: "Pomodoro pelato, Bufala, Datterino giallo, Gel di Basilico", price: '11.00 '},
+    { name: "Capricciosa", description: "Pomodoro pelato, Fiordilatte, Funghi, Carciofi, Olive, Prosciutto Cotto", price: '9.00' }
+  ];
+
+  export const LePizzeSpeciali: MenuItem[] = [
+    { name: "La Burrata", description: "Fior di latte, Pomodoro pelato, Bresaola, Rucola, Scaglie di grana, Burrata pugliese", price: '14.00' },
+    { name: "La Mortadella", description: "Pesto di pistacchi, Mortadella, Fior di latte, Burrata", price: '13.50' },
+    { name: "La Prag", description: "Pomodoro pelato, Bufala campana, Datteri rossi, Crudo, Stracciatella pugliese", price: '14.00 '},
+    { name: "Datterina", description: "Salsa di Datterini gialli, Fior di latte, Crudo, Burrata pugliese", price: '14.00 '},
+    { name: "Friarielli", description: "Fior di latte, Salsiccia, Friarielli, Scamorza", price: '12.00 '},
+    { name: "La Zucchetta", description: "Crema di zucca, Bufala campana, Salsiccia, Scaglie di grana", price: '12.00 '},
+    { name: "Frutti di Mare", description: "", price: '14.00' },
+    { name: "Il Calzone Fritto", description: "Fior di latte, Pomodoro pelato, Prosciutto Cotto", price: '11.00 '},
+    { name: "Covaccino Gambero", description: "Pan pizza, Pesto di pistacchi, Stracciatella, Gambero Rosso", price: '14.00' },
+    { name: "Covaccino Affumicato", description: "Pan pizza, Bufala campana, Salmone affumicato, Pesto di lattuga", price: '14.00' }
+  ];
+  
+  

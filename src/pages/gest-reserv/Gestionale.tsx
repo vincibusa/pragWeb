@@ -8,6 +8,8 @@ interface Reservation {
   date: string;
   time: string;
   partySize: number;
+  phone: string;   // Aggiunto campo phone
+  email: string;   // Aggiunto campo email
 }
 
 export default function Gestionale() {
@@ -60,19 +62,18 @@ export default function Gestionale() {
     }
   };
 
+  // Aggiornato generateTimeOptions con gli orari desiderati
   const generateTimeOptions = () => {
-    const options: JSX.Element[] = [];
-    for (let hour = 19; hour <= 23; hour++) {
-      ['00', '15', '30', '45'].forEach((minute) => {
-        const time = `${hour.toString().padStart(2, '0')}:${minute}`;
-        options.push(
-          <option key={time} value={time}>
-            {time}
-          </option>
-        );
-      });
-    }
-    return options;
+    const availableTimes = [
+      '19:30', '19:45', '20:55', '21:00', '21:15', '21:30', '21:45', '22:00',
+      '22:15', '22:30', '22:45', '23:00'
+    ];
+
+    return availableTimes.map((time) => (
+      <option key={time} value={time}>
+        {time}
+      </option>
+    ));
   };
 
   const formatDateToItalian = (dateString: string) => {
@@ -86,17 +87,23 @@ export default function Gestionale() {
       {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
       <ul className="list-group mb-4">
         {reservations.map((reservation) => (
-          <li key={reservation.id} className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong>{reservation.name}</strong> - {formatDateToItalian(reservation.date)} alle {reservation.time} per {reservation.partySize} persone
-            </div>
-            <div className='d-flex gap-2'>
-              <button className="btn btn-warning btn-sm me-2" onClick={() => handleEditReservation(reservation)}>
-                Modifica
-              </button>
-              <button className="btn btn-danger btn-sm" onClick={() => handleDeleteReservation(reservation.id)}>
-                Elimina
-              </button>
+          <li key={reservation.id} className="list-group-item">
+            <div className="d-flex flex-column">
+              <div>
+                <strong>{reservation.name}</strong> - {formatDateToItalian(reservation.date)} alle {reservation.time} per {reservation.partySize} persone
+                <br />
+                <small>Telefono: {reservation.phone}</small>
+                <br />
+                <small>Email: {reservation.email}</small>
+              </div>
+              <div className="d-flex justify-content-between gap-2 mt-3">
+                <button className="btn btn-warning btn-sm" onClick={() => handleEditReservation(reservation)}>
+                  Modifica
+                </button>
+                <button className="btn btn-danger btn-sm" onClick={() => handleDeleteReservation(reservation.id)}>
+                  Elimina
+                </button>
+              </div>
             </div>
           </li>
         ))}
@@ -142,6 +149,26 @@ export default function Gestionale() {
               className="form-control"
               name="partySize"
               value={editingReservation.partySize}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Telefono</label>
+            <input
+              type="tel"
+              className="form-control"
+              name="phone"
+              value={editingReservation.phone}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              value={editingReservation.email}
               onChange={handleChange}
             />
           </div>

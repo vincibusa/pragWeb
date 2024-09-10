@@ -8,20 +8,24 @@ interface Reservation {
   date: string;
   time: string;
   partySize: number;
+  phone: string;  // Aggiunto il campo phone
+  email: string;  // Aggiunto il campo email
 }
 
 function Reservations() {
   const [newReservation, setNewReservation] = useState<Omit<Reservation, 'id'>>({
     name: '',
     date: '',
-    time: '19:00',
+    time: '19:30',
     partySize: 0,
+    phone: '',  // Inizializza phone
+    email: '',  // Inizializza email
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleAddReservation = async () => {
     // Validate inputs
-    if (!newReservation.name || !newReservation.date || !newReservation.time || newReservation.partySize <= 0) {
+    if (!newReservation.name || !newReservation.date || !newReservation.time || newReservation.partySize <= 0 || !newReservation.phone || !newReservation.email) {
       setErrorMessage('Tutti i campi devono essere compilati correttamente.');
       
       // Clear the error message after 3 seconds
@@ -37,22 +41,20 @@ function Reservations() {
 
     // Call API
     await addReservation(newReservation);
-    setNewReservation({ name: '', date: '', time: '19:00', partySize: 0 }); // Reset form with default time
+    setNewReservation({ name: '', date: '', time: '19:30', partySize: 0, phone: '', email: '' }); // Reset form
   };
 
   const generateTimeOptions = () => {
-    const options: JSX.Element[] = [];
-    for (let hour = 19; hour <= 23; hour++) {
-      ['00', '15', '30', '45'].forEach((minute) => {
-        const time = `${hour.toString().padStart(2, '0')}:${minute}`;
-        options.push(
-          <option key={time} value={time}>
-            {time}
-          </option>
-        );
-      });
-    }
-    return options;
+    const availableTimes = [
+      '19:30', '19:45', '20:55', '21:00', '21:15', '21:30', '21:45', '22:00',
+      '22:15', '22:30', '22:45', '23:00'
+    ];
+
+    return availableTimes.map((time) => (
+      <option key={time} value={time}>
+        {time}
+      </option>
+    ));
   };
 
   const getCurrentDate = () => {
@@ -77,6 +79,26 @@ function Reservations() {
             placeholder="Inserisci nome e cognome"
             value={newReservation.name}
             onChange={(e) => setNewReservation({ ...newReservation, name: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Inserisci email"
+            value={newReservation.email}
+            onChange={(e) => setNewReservation({ ...newReservation, email: e.target.value })}
+          />
+        </div>
+        <div className="form-group">
+          <label>Telefono</label>
+          <input
+            type="tel"
+            className="form-control"
+            placeholder="Inserisci numero di telefono"
+            value={newReservation.phone}
+            onChange={(e) => setNewReservation({ ...newReservation, phone: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -109,6 +131,8 @@ function Reservations() {
             onChange={(e) => setNewReservation({ ...newReservation, partySize: parseInt(e.target.value) })}
           />
         </div>
+     
+    
         <div className='d-flex justify-content-center'>
           <button type="button" className="btn btn-primary mt-3" onClick={handleAddReservation}>
             Invia Prenotazione

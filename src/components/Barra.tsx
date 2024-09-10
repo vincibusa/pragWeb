@@ -32,7 +32,7 @@ export default function Barra() {
             <Nav.Link href="#menu">Menu</Nav.Link>
           </Nav>
           <Nav className="ms-auto" onClick={handleClose}>
-            <Nav.Link href="#gallery">Galleria</Nav.Link>
+            <Nav.Link href="#Galleria">Galleria</Nav.Link>
             <Nav.Link href="#prenotazioni" style={{ color: 'red' }}>Prenota un tavolo</Nav.Link>
           </Nav>
         </Navbar.Collapse>
