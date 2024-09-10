@@ -16,18 +16,19 @@ export default function Menu() {
 
     const navigateToMenuAntipasti = () => {
       navigate('/menu-antipasti');
-      window.scrollTo(0, 0); // Scrolla in alto
+      setTimeout(() => window.scrollTo(0, 0), 100); // Ritarda lo scroll di 100 ms
   };
   
   const navigateToMenuPizzeria = () => {
       navigate('/menu-pizzeria');
-      window.scrollTo(0, 0); // Scrolla in alto
+      setTimeout(() => window.scrollTo(0, 0), 100); // Ritarda lo scroll di 100 ms
   };
   
   const navigateToMenuRistorante = () => {
       navigate('/menu-ristorante');
-      window.scrollTo(0, 0); // Scrolla in alto
+      setTimeout(() => window.scrollTo(0, 0), 100); // Ritarda lo scroll di 100 ms
   };
+  
   
 
     return (
