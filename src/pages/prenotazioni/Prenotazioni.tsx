@@ -75,7 +75,7 @@ function Reservations() {
           <label>Nome e cognome</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control shadow-sm"
             placeholder="Inserisci nome e cognome"
             value={newReservation.name}
             onChange={(e) => setNewReservation({ ...newReservation, name: e.target.value })}
@@ -85,7 +85,7 @@ function Reservations() {
           <label>Email</label>
           <input
             type="email"
-            className="form-control"
+            className="form-control shadow-sm"
             placeholder="Inserisci email"
             value={newReservation.email}
             onChange={(e) => setNewReservation({ ...newReservation, email: e.target.value })}
@@ -95,7 +95,7 @@ function Reservations() {
           <label>Telefono</label>
           <input
             type="tel"
-            className="form-control"
+            className="form-control shadow-sm"
             placeholder="Inserisci numero di telefono"
             value={newReservation.phone}
             onChange={(e) => setNewReservation({ ...newReservation, phone: e.target.value })}
@@ -105,7 +105,7 @@ function Reservations() {
           <label>Giorno</label>
           <input
             type="date"
-            className="form-control"
+            className="form-control shadow-sm"
             value={newReservation.date}
             min={getCurrentDate()}
             onChange={(e) => setNewReservation({ ...newReservation, date: e.target.value })}
@@ -114,7 +114,7 @@ function Reservations() {
         <div className="form-group">
           <label>Ora</label>
           <select
-            className="form-control"
+            className="form-control shadow-sm"
             value={newReservation.time}
             onChange={(e) => setNewReservation({ ...newReservation, time: e.target.value })}
           >
@@ -125,7 +125,7 @@ function Reservations() {
           <label>Numero di persone</label>
           <input
             type="number"
-            className="form-control"
+            className="form-control shadow-sm"
             placeholder="Inserisci numero posti"
             value={newReservation.partySize}
             onChange={(e) => setNewReservation({ ...newReservation, partySize: parseInt(e.target.value) })}
@@ -134,7 +134,7 @@ function Reservations() {
      
     
         <div className='d-flex justify-content-center'>
-          <button type="button" className="btn btn-primary mt-3" onClick={handleAddReservation}>
+          <button type="button" className="btn btn-primary mt-3 shadow" onClick={handleAddReservation}>
             Invia Prenotazione
           </button>
         </div>

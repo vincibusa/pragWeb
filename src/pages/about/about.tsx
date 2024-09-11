@@ -20,7 +20,7 @@ export default function About() {
         <h3 className="text-center">Ci trovi anche su Just Eat</h3>
         <div className="d-flex justify-content-center w-100">
           <Button
-            className="mt-3 w-50"
+            className="mt-3 w-50 shadow"
             style={{ backgroundColor: '#F9423A', color: 'white' }}
             variant="outline-dark"
             onClick={navigateToJustEat}
@@ -38,7 +38,7 @@ export default function About() {
         <div className="d-flex justify-content-center w-100 mt-3">
           <Button
          
-            className="mx-2 "
+            className="mx-2 shadow"
             style={{ backgroundColor: '#010101', color: 'white', borderRadius:9999 , aspectRatio:1}} // Colore TikTok
             onClick={() => window.open('https://www.tiktok.com/@prag_ristorantepi', '_blank')}
           >
@@ -46,7 +46,7 @@ export default function About() {
           </Button>
 
           <Button
-            className="mx-2"
+            className="mx-2 shadow"
             style={{ backgroundColor: '#25D366', color: 'white',borderRadius:9999 , aspectRatio:1 }} // Colore WhatsApp
             onClick={() => window.open('https://wa.me/393312203996', '_blank')}
           >
@@ -54,7 +54,7 @@ export default function About() {
           </Button>
 
           <Button
-            className="mx-2"
+            className="mx-2 shadow"
             style={{ backgroundColor: '#007BFF', color: 'white',borderRadius:9999 , aspectRatio:1 }} // Colore telefono
             onClick={() => window.location.href = 'tel:+393312203996'}
           >

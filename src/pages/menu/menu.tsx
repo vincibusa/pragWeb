@@ -43,10 +43,10 @@ export default function Menu() {
                 style={{ width: '100%', border: 'none', borderRadius: 0 }}
                 data-aos="fade-up"
             >
-                <Card.Img style={{ borderRadius: 15 }} variant="top" src={antipasti} />
+                <Card.Img className='shadow' style={{ borderRadius: 15 }} variant="top" src={antipasti} />
                 <Card.Body>
                     <Card.Title>Antipasti</Card.Title>
-                    <Button className="mt-3 w-50" variant="outline-dark" onClick={navigateToMenuAntipasti}>
+                    <Button className="mt-3 w-50 shadow" variant="outline-dark" onClick={navigateToMenuAntipasti}>
                         Leggi
                     </Button>
                 </Card.Body>
@@ -58,10 +58,10 @@ export default function Menu() {
                 style={{ width: '100%', border: 'none', borderRadius: 0 }}
                data-aos="fade-up"
             >
-                <Card.Img style={{ borderRadius: 15 }} variant="top" src={image3} />
+                <Card.Img className="shadow" style={{ borderRadius: 15 }} variant="top" src={image3} />
                 <Card.Body>
                     <Card.Title>Menu Pizzeria</Card.Title>
-                    <Button className="mt-3 w-50" variant="outline-dark" onClick={navigateToMenuPizzeria}>
+                    <Button className="mt-3 w-50 shadow" variant="outline-dark" onClick={navigateToMenuPizzeria}>
                         Leggi
                     </Button>
                 </Card.Body>
@@ -73,10 +73,10 @@ export default function Menu() {
                 style={{ width: '100%', border: 'none', borderRadius: 0 }}
            data-aos="fade-up"
             >
-                <Card.Img style={{ borderRadius: 15 }} variant="top" src={ristorante} />
+                <Card.Img className='shadow' style={{ borderRadius: 15 }} variant="top" src={ristorante} />
                 <Card.Body>
                     <Card.Title>Menu Ristorante</Card.Title>
-                    <Button className="mt-3 w-50" variant="outline-dark" onClick={navigateToMenuRistorante}>
+                    <Button className="mt-3 w-50 shadow" variant="outline-dark" onClick={navigateToMenuRistorante}>
                         Leggi
                     </Button>
                 </Card.Body>
