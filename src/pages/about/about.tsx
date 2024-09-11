@@ -56,7 +56,7 @@ export default function About() {
           <Button
             className="mx-2"
             style={{ backgroundColor: '#007BFF', color: 'white',borderRadius:9999 , aspectRatio:1 }} // Colore telefono
-            onClick={() => window.location.href = 'tel:+39393312203996'}
+            onClick={() => window.location.href = 'tel:+393312203996'}
           >
             <FaPhone size={24} />
           </Button>
