@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getReservations, updateReservation, deleteReservation } from '../../../api';
 import { ref, onChildAdded, off, DataSnapshot } from 'firebase/database';
-import { database } from '../../../firebaseConfig'; // Assicurati che questo punti al file corretto
+import { database } from '../../../firebaseConfig'; // Make sure this points to your Firebase configuration
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface Reservation {
@@ -23,34 +23,16 @@ export default function Gestionale() {
     const reservationsRef = ref(database, 'reservations');
 
     const handleNewReservation = (snapshot: DataSnapshot) => {
-      console.log('Nuova prenotazione:', snapshot.val()); // Log dei dati
       const newReservation = snapshot.val();
       if (newReservation) {
         setReservations((prevReservations) => [
           ...prevReservations,
           { id: snapshot.key as string, ...newReservation }
         ]);
-
-        // Mostra la notifica
-        if (Notification.permission === 'granted') {
-          new Notification('Nuova prenotazione', {
-            body: `Nuova prenotazione da ${newReservation.name} per il ${newReservation.date} alle ${newReservation.time}.`,
-            
-          });
-        }
       }
     };
 
-    // Richiedi permessi per le notifiche
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission().then((permission) => {
-        if (permission !== 'granted') {
-          console.log('Notifiche non autorizzate.');
-        }
-      });
-    }
-
-    // Ascolta le prenotazioni esistenti
+    // Fetch existing reservations
     async function fetchData() {
       try {
         const result = await getReservations();
@@ -61,10 +43,10 @@ export default function Gestionale() {
     }
     fetchData();
 
-    // Aggiungi listener per le nuove prenotazioni
+    // Set up real-time listener for new reservations
     onChildAdded(reservationsRef, handleNewReservation);
 
-    // Cleanup listener quando il componente viene smontato
+    // Cleanup listener on component unmount
     return () => {
       off(reservationsRef, 'child_added', handleNewReservation);
     };
@@ -223,5 +205,5 @@ export default function Gestionale() {
         </form>
       )}
     </div>
-  );
+  ); 
 }
