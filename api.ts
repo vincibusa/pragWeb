@@ -1,47 +1,69 @@
-const API_BASE_URL = 'https://prag-backend-f260aea8cfa5.herokuapp.com';
+import { database } from './firebaseConfig';
+import { ref, push, get, update, remove, set } from 'firebase/database';
 
 interface Reservation {
-    id?: number; // Optional because it might not be present when adding a new reservation
-    name: string;
-    date: string;
-    time: string;
-    partySize: number;
-  }
+  id?: string;
+  name: string;
+  date: string;
+  time: string;
+  partySize: number;
+  phone: string;
+  email: string;
+}
 
 // Aggiungere una nuova prenotazione
 export async function addReservation(reservation: Reservation) {
-  const response = await fetch(`${API_BASE_URL}/reservations`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(reservation),
-  });
-  return await response.json();
+  try {
+    console.log('Attempting to add reservation:', reservation);
+    const reservationsRef = ref(database, 'reservations');
+    const newReservationRef = push(reservationsRef);
+    await set(newReservationRef, reservation);
+    console.log('Reservation added successfully with ID:', newReservationRef.key);
+    return { id: newReservationRef.key, ...reservation };
+  } catch (error) {
+    console.error('Error adding reservation:', error);
+    throw error;
+  }
 }
 
 // Ottenere tutte le prenotazioni
 export async function getReservations() {
-  const response = await fetch(`${API_BASE_URL}/reservations`);
-  return await response.json();
+  try {
+    const reservationsRef = ref(database, 'reservations');
+    const snapshot = await get(reservationsRef);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const reservationsArray = Object.keys(data).map(id => ({ id, ...data[id] }));
+      return reservationsArray;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error('Error getting reservations:', error);
+    throw error;
+  }
 }
 
 // Modificare una prenotazione
-export async function updateReservation(id: number, updatedReservation: Reservation) {
-  const response = await fetch(`${API_BASE_URL}/reservations/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updatedReservation),
-  });
-  return await response.json();
+export async function updateReservation(id: string, updatedReservation: Reservation) {
+  try {
+    const reservationRef = ref(database, `reservations/${id}`);
+    await update(reservationRef, updatedReservation);
+    return { id, ...updatedReservation };
+  } catch (error) {
+    console.error('Error updating reservation:', error);
+    throw error;
+  }
 }
 
 // Eliminare una prenotazione
-export async function deleteReservation(id: number) {
-  const response = await fetch(`${API_BASE_URL}/reservations/${id}`, {
-    method: 'DELETE',
-  });
-  return await response.json();
+export async function deleteReservation(id: string) {
+  try {
+    const reservationRef = ref(database, `reservations/${id}`);
+    await remove(reservationRef);
+    return { success: true };
+  } catch (error) {
+    console.error('Error deleting reservation:', error);
+    throw error;
+  }
 }

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { getReservations, updateReservation, deleteReservation } from '../../../api';
+import { ref, onChildAdded, off, DataSnapshot } from 'firebase/database';
+import { database } from '../../../firebaseConfig'; // Assicurati che questo punti al file corretto
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface Reservation {
-  id: number;
+  id: string;
   name: string;
   date: string;
   time: string;
   partySize: number;
-  phone: string;   // Aggiunto campo phone
-  email: string;   // Aggiunto campo email
+  phone: string;
+  email: string;
 }
 
 export default function Gestionale() {
@@ -18,18 +20,56 @@ export default function Gestionale() {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
+    const reservationsRef = ref(database, 'reservations');
+
+    const handleNewReservation = (snapshot: DataSnapshot) => {
+      const newReservation = snapshot.val();
+      if (newReservation) {
+        setReservations((prevReservations) => [
+          ...prevReservations,
+          { id: snapshot.key as string, ...newReservation }
+        ]);
+
+        // Mostra la notifica
+        if (Notification.permission === 'granted') {
+          new Notification('Nuova prenotazione', {
+            body: `Nuova prenotazione da ${newReservation.name} per il ${newReservation.date} alle ${newReservation.time}.`,
+            icon: 'https://example.com/icon.png' // Inserisci un URL per l'icona della notifica
+          });
+        }
+      }
+    };
+
+    // Richiedi permessi per le notifiche
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission().then((permission) => {
+        if (permission !== 'granted') {
+          console.log('Notifiche non autorizzate.');
+        }
+      });
+    }
+
+    // Ascolta le prenotazioni esistenti
     async function fetchData() {
       try {
         const result = await getReservations();
-        setReservations(result.reservations);
+        setReservations(result);
       } catch {
         setErrorMessage('Failed to fetch reservations.');
       }
     }
     fetchData();
+
+    // Aggiungi listener per le nuove prenotazioni
+    onChildAdded(reservationsRef, handleNewReservation);
+
+    // Cleanup listener quando il componente viene smontato
+    return () => {
+      off(reservationsRef, 'child_added', handleNewReservation);
+    };
   }, []);
 
-  const handleDeleteReservation = async (id: number) => {
+  const handleDeleteReservation = async (id: string) => {
     try {
       await deleteReservation(id);
       setReservations(reservations.filter((r) => r.id !== id));
@@ -57,12 +97,14 @@ export default function Gestionale() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     if (editingReservation) {
-      const { name, value } = e.target;
-      setEditingReservation({ ...editingReservation, [name]: value });
+      const { name, value, type } = e.target;
+      setEditingReservation({
+        ...editingReservation,
+        [name]: type === 'number' ? parseInt(value) : value
+      });
     }
   };
 
-  // Aggiornato generateTimeOptions con gli orari desiderati
   const generateTimeOptions = () => {
     const availableTimes = [
       '19:30', '19:45', '20:55', '21:00', '21:15', '21:30', '21:45', '22:00',

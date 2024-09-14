@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { addReservation } from '../../../api';
+import { addReservation } from '../../../api'; // Assicurati che questo punti al file corretto
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface Reservation {
-  id: number;
+  id?: string; // Optional because it might not be present when adding a new reservation
   name: string;
   date: string;
   time: string;
   partySize: number;
-  phone: string;  // Aggiunto il campo phone
-  email: string;  // Aggiunto il campo email
+  phone: string;
+  email: string;
 }
 
 function Reservations() {
@@ -18,8 +18,8 @@ function Reservations() {
     date: '',
     time: '19:30',
     partySize: 0,
-    phone: '',  // Inizializza phone
-    email: '',  // Inizializza email
+    phone: '',
+    email: '',
   });
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -35,15 +35,28 @@ function Reservations() {
       
       return;
     }
-
+  
     // Clear error message
     setErrorMessage('');
-
+  
     // Call API
-    await addReservation(newReservation);
-    setNewReservation({ name: '', date: '', time: '19:30', partySize: 0, phone: '', email: '' }); // Reset form
+    try {
+      await addReservation(newReservation);
+      setNewReservation({ name: '', date: '', time: '19:30', partySize: 0, phone: '', email: '' }); // Reset form
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(`Errore durante l'aggiunta della prenotazione: ${error.message}`);
+      } else {
+        setErrorMessage('Errore sconosciuto durante l\'aggiunta della prenotazione.');
+      }
+      
+      // Clear the error message after 3 seconds
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
+    }
   };
-
+  
   const generateTimeOptions = () => {
     const availableTimes = [
       '19:30', '19:45', '20:55', '21:00', '21:15', '21:30', '21:45', '22:00',
@@ -131,7 +144,6 @@ function Reservations() {
             onChange={(e) => setNewReservation({ ...newReservation, partySize: parseInt(e.target.value) })}
           />
         </div>
-     
     
         <div className='d-flex justify-content-center'>
           <button type="button" className="btn btn-primary mt-3 shadow" onClick={handleAddReservation}>
