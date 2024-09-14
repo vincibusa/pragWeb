@@ -23,6 +23,7 @@ export default function Gestionale() {
     const reservationsRef = ref(database, 'reservations');
 
     const handleNewReservation = (snapshot: DataSnapshot) => {
+      console.log('Nuova prenotazione:', snapshot.val()); // Log dei dati
       const newReservation = snapshot.val();
       if (newReservation) {
         setReservations((prevReservations) => [
@@ -34,7 +35,7 @@ export default function Gestionale() {
         if (Notification.permission === 'granted') {
           new Notification('Nuova prenotazione', {
             body: `Nuova prenotazione da ${newReservation.name} per il ${newReservation.date} alle ${newReservation.time}.`,
-            icon: 'https://example.com/icon.png' // Inserisci un URL per l'icona della notifica
+            
           });
         }
       }
@@ -222,5 +223,5 @@ export default function Gestionale() {
         </form>
       )}
     </div>
-  ); 
+  );
 }
